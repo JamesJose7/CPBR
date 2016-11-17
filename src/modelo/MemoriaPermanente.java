@@ -16,7 +16,11 @@ import java.util.Random;
  */
 public class MemoriaPermanente {
 
-    Map datos = new HashMap();
+    private Map<Integer, Integer> mDatos;
+    
+    public MemoriaPermanente() {
+        mDatos = new HashMap();
+    }
 
     public void filMemory(int size) {
         if (size >= 900) {
@@ -24,7 +28,7 @@ public class MemoriaPermanente {
             int n;
             for (int i = 900; i < size; i++) {
                 n = rn.nextInt(10) + 1;
-                datos.put(i, n);
+                mDatos.put(i, n);
             }
         } else {
             System.out.println("Muy pequeño");
@@ -33,10 +37,15 @@ public class MemoriaPermanente {
     }
 
     public void emptyMemory() {
-        datos.clear();
+        mDatos.clear();
     }
 
     public Map readMemory() {
-        return datos;
+        return mDatos;
     }
+    
+    public void writeMemory(int pos, int data) {
+        mDatos.replace(pos, data);
+    }
+    
 }

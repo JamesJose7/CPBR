@@ -32,6 +32,8 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        instruccionesFrame = new javax.swing.JFrame();
+        jLabel18 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         editorTxtArea = new javax.swing.JTextArea();
@@ -95,6 +97,27 @@ public class GUI extends javax.swing.JFrame {
         jSeparator17 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
 
+        instruccionesFrame.setTitle("Leyes de Von Neumann");
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/Tabla Von Neumann.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout instruccionesFrameLayout = new javax.swing.GroupLayout(instruccionesFrame.getContentPane());
+        instruccionesFrame.getContentPane().setLayout(instruccionesFrameLayout);
+        instruccionesFrameLayout.setHorizontalGroup(
+            instruccionesFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(instruccionesFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        instruccionesFrameLayout.setVerticalGroup(
+            instruccionesFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(instruccionesFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -131,98 +154,98 @@ public class GUI extends javax.swing.JFrame {
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("900");
+        jLabel3.setText("901");
 
         jTextField3.setEditable(false);
 
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("900");
+        jLabel4.setText("902");
 
         jTextField4.setEditable(false);
 
         jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("900");
+        jLabel5.setText("903");
 
         jTextField5.setEditable(false);
 
         jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("900");
+        jLabel6.setText("904");
 
         jTextField6.setEditable(false);
 
         jSeparator7.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("900");
+        jLabel7.setText("905");
 
         jTextField7.setEditable(false);
 
         jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel8.setText("900");
+        jLabel8.setText("906");
 
         jTextField8.setEditable(false);
 
         jSeparator9.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel9.setText("900");
+        jLabel9.setText("907");
 
         jTextField9.setEditable(false);
 
         jSeparator10.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel10.setText("900");
+        jLabel10.setText("908");
 
         jTextField10.setEditable(false);
 
         jSeparator11.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel11.setText("900");
+        jLabel11.setText("909");
 
         jTextField11.setEditable(false);
 
         jSeparator12.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel12.setText("900");
+        jLabel12.setText("910");
 
         jTextField12.setEditable(false);
 
         jSeparator13.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel13.setText("900");
+        jLabel13.setText("911");
 
         jTextField13.setEditable(false);
 
         jSeparator14.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel14.setText("900");
+        jLabel14.setText("912");
 
         jTextField14.setEditable(false);
 
         jSeparator15.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel15.setText("900");
+        jLabel15.setText("913");
 
         jTextField15.setEditable(false);
 
         jSeparator16.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel16.setText("900");
+        jLabel16.setText("914");
 
         jMenu2.setText("Herramientas");
 
@@ -522,6 +545,7 @@ public class GUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea consoleOutputTxtArea;
     private javax.swing.JTextArea editorTxtArea;
+    private javax.swing.JFrame instruccionesFrame;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -531,6 +555,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

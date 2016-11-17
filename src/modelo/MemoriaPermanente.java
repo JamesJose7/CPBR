@@ -20,13 +20,14 @@ public class MemoriaPermanente {
     
     public MemoriaPermanente() {
         mDatos = new HashMap();
+        fillMemory(914);
     }
 
-    public void filMemory(int size) {
+    public void fillMemory(int size) {
         if (size >= 900) {
             Random rn = new Random();
             int n;
-            for (int i = 900; i < size; i++) {
+            for (int i = 900; i <= size; i++) {
                 n = rn.nextInt(10) + 1;
                 mDatos.put(i, n);
             }
@@ -37,7 +38,9 @@ public class MemoriaPermanente {
     }
 
     public void emptyMemory() {
-        mDatos.clear();
+        for (Map.Entry<Integer, Integer> entry : mDatos.entrySet()) {
+            entry.setValue(0);
+        }
     }
 
     public Map readMemory() {

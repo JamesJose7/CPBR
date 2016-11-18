@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.ConsoleManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeListener;
@@ -25,6 +26,7 @@ import modelo.Computer;
 public class GUI extends javax.swing.JFrame {
 
     private Computer computer;
+    private ConsoleManager console;
 
     /**
      * Creates new form GUI
@@ -34,6 +36,8 @@ public class GUI extends javax.swing.JFrame {
         
         computer = new Computer();
         
+        //Start console
+        ConsoleManager.welcomeMessage();
         //Key combination for editor
         editorTxtArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,
                 java.awt.event.InputEvent.CTRL_DOWN_MASK),
@@ -187,7 +191,7 @@ public class GUI extends javax.swing.JFrame {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         editorTxtArea.setColumns(20);
-        editorTxtArea.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
+        editorTxtArea.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         editorTxtArea.setRows(5);
         jScrollPane1.setViewportView(editorTxtArea);
 
@@ -197,13 +201,17 @@ public class GUI extends javax.swing.JFrame {
         consoleOutputTxtArea.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         consoleOutputTxtArea.setForeground(new java.awt.Color(0, 204, 51));
         consoleOutputTxtArea.setRows(5);
-        consoleOutputTxtArea.setText("Test text");
         jScrollPane2.setViewportView(consoleOutputTxtArea);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Console");
 
         jButton1.setLabel(">> Run");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         m900.setEditable(false);
 
@@ -602,6 +610,10 @@ public class GUI extends javax.swing.JFrame {
         loadMemory();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        readEditor();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -670,7 +682,7 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea consoleOutputTxtArea;
+    public static javax.swing.JTextArea consoleOutputTxtArea;
     private javax.swing.JTextArea editorTxtArea;
     private javax.swing.JFrame instruccionesFrame;
     private javax.swing.JButton jButton1;

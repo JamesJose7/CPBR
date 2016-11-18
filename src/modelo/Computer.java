@@ -42,12 +42,13 @@ public class Computer {
         //Log process count
         //Log loaded instruction
 
-        String currentInstruction = "";
+        String currentInstruction;
         do {
             //Execute instruction in parser
             currentInstruction = mMemoriaRam.retrieveInstruction();
             if (currentInstruction != null) {
                 mParser.parse(currentInstruction);
+                processCounter++;
             }
         } while (currentInstruction != null);
 

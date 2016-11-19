@@ -12,3 +12,9 @@
 hs_err_pid*
 /build/
 /dist/
+
+#netbeans specific
+core
+nbproject/*
+!nbproject/project.properties
+!nbproject/project.xml

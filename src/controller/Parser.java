@@ -24,75 +24,80 @@ public class Parser {
     }
 
     public void parse(String instruction) throws ParseException {
-        if (instruction.toLowerCase().equals("clear")) {
-            ConsoleManager.clear();
-            Computer.processCounter--;
-        } else if (instruction.toLowerCase().equals("show")) {
-            log();
-        } else {
-            if (instruction.contains("-")) {
-                String[] split = instruction.split("-");
+        //Ignore comments
+        if (!instruction.startsWith("//")) {
 
-                if (split.length == 2) {
-                    //Split instruction
-                    mInstruction = Integer.parseInt(split[0]);
-                    mMemoryPos = Integer.parseInt(split[1]);
+            if (instruction.toLowerCase().equals("clear")) {
+                ConsoleManager.clear();
+                Computer.processCounter--;
+            } else if (instruction.toLowerCase().equals("show")) {
+                log();
+            } else {
+                if (instruction.contains("-")) {
+                    String[] split = instruction.split("-");
 
-                    //Check instruction domain
-                    if (mInstruction > 0 && mInstruction <= 21) {
-                        //Check memory pos
-                        if (mMemoryPos >= 900 && mMemoryPos <= 914) {
+                    if (split.length == 2) {
+                        //Split instruction
+                        mInstruction = Integer.parseInt(split[0]);
+                        mMemoryPos = Integer.parseInt(split[1]);
 
-                            switch (mInstruction) {
-                                case 1:
-                                    instr1();
-                                    log();
-                                    break;
-                                case 2:
-                                    instr2();
-                                    log();
-                                    break;
-                                case 5:
-                                    instr5();
-                                    log();
-                                    break;
-                                case 6:
-                                    instr6();
-                                    log();
-                                case 7:
-                                    instr7();
-                                    log();
-                                case 8:
-                                    instr8();
-                                    log();
-                                case 16:
-                                    instr16();
-                                    log();
-                                case 17:
-                                    instr17();
-                                    log();
-                                default:
-                                    ConsoleManager.printToConsole(getErrorMessage() + "Instruction does not exist");
-                                    throw new ParseException("Instruction does not exist", 0);
+                        //Check instruction domain
+                        if (mInstruction > 0 && mInstruction <= 21) {
+                            //Check memory pos
+                            if (mMemoryPos >= 900 && mMemoryPos <= 914) {
+
+                                switch (mInstruction) {
+                                    case 1:
+                                        instr1();
+                                        log();
+                                        break;
+                                    case 2:
+                                        instr2();
+                                        log();
+                                        break;
+                                    case 5:
+                                        instr5();
+                                        log();
+                                        break;
+                                    case 6:
+                                        instr6();
+                                        log();
+                                    case 7:
+                                        instr7();
+                                        log();
+                                    case 8:
+                                        instr8();
+                                        log();
+                                    case 16:
+                                        instr16();
+                                        log();
+                                    case 17:
+                                        instr17();
+                                        log();
+                                    default:
+                                        ConsoleManager.printToConsole(getErrorMessage() + "Instruction does not exist");
+                                        throw new ParseException("Instruction does not exist", 0);
+                                }
+                            } else {
+                                ConsoleManager.printToConsole(getErrorMessage() + "Memory position does not exist");
+                                throw new ParseException("Memory position does not exist", 0);
                             }
                         } else {
-                            ConsoleManager.printToConsole(getErrorMessage() + "Memory position does not exist");
-                            throw new ParseException("Memory position does not exist", 0);
+                            ConsoleManager.printToConsole(getErrorMessage() + "Instruction does not exist");
+                            throw new ParseException("Instruction does not exist", 0);
                         }
-                    } else {
-                        ConsoleManager.printToConsole(getErrorMessage() + "Instruction does not exist");
-                        throw new ParseException("Instruction does not exist", 0);
-                    }
 
+                    } else {
+                        ConsoleManager.printToConsole(getErrorMessage() + "Incorrect number of arguments");
+                        throw new ParseException("Incorrect number of arguments", 0);
+                    }
                 } else {
-                    ConsoleManager.printToConsole(getErrorMessage() + "Incorrect number of arguments");
-                    throw new ParseException("Incorrect number of arguments", 0);
+                    ConsoleManager.printToConsole(getErrorMessage() + "Wrong syntax");
+                    throw new ParseException("Wrong syntax", 0);
                 }
-            } else {
-                ConsoleManager.printToConsole(getErrorMessage() + "Wrong syntax");
-                throw new ParseException("Wrong syntax", 0);
             }
         }
+
     }
 
     private String getErrorMessage() {
@@ -123,17 +128,17 @@ public class Parser {
         //Clear AC and add Absolute |M(x)| to AC
         Computer.mAcumulador += Math.abs((Integer) mMemoriaPerm.readMemory().get(mMemoryPos));
     }
-    
+
     private void instr8() {
         //Clear AC and substract Absolute |M(x)| to AC
         Computer.mAcumulador -= Math.abs((Integer) mMemoriaPerm.readMemory().get(mMemoryPos));
     }
-    
+
     private void instr16() {
         //Multiply AC by 2
         Computer.mAcumulador *= 2;
     }
-    
+
     private void instr17() {
         //Divide AC by 2
         Computer.mAcumulador /= 2;

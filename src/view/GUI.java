@@ -386,6 +386,11 @@ public class GUI extends javax.swing.JFrame {
         jMenu4.add(jMenuItem3);
 
         jMenuItem9.setText("Instrucciones de programa");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem9);
 
         jMenu3.add(jMenu4);
@@ -629,6 +634,10 @@ public class GUI extends javax.swing.JFrame {
         showVonNeumanTable();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        showInstructionsTable();
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -707,6 +716,26 @@ public class GUI extends javax.swing.JFrame {
         
         ImageIcon imageIcon = 
                 new ImageIcon(new ImageIcon("src/res/Tabla Von Neumann.jpg").
+                        getImage().
+                        getScaledInstance(instruccionesLabel.getWidth(), instruccionesLabel.getHeight(), Image.SCALE_SMOOTH));
+        instruccionesLabel.setIcon(imageIcon);
+
+        //pack()
+        instruccionesFrame.setLocationRelativeTo(null);
+        instruccionesFrame.setVisible(true);
+    }
+    
+    private void showInstructionsTable() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int w = (int) (screenSize.width / 2);
+        int h = (int) ((int) screenSize.height - (screenSize.height * 0.38));
+        instruccionesFrame.setBounds(0, 0, w, h);
+        int nW = (int) ((int) w - (w * 0.045));
+        int nH = (int) ((int) h - (h * 0.045));
+        instruccionesLabel.setBounds(0, 0, nW, nH);
+        
+        ImageIcon imageIcon = 
+                new ImageIcon(new ImageIcon("src/res/tabla instrucciones.jpg").
                         getImage().
                         getScaledInstance(instruccionesLabel.getWidth(), instruccionesLabel.getHeight(), Image.SCALE_SMOOTH));
         instruccionesLabel.setIcon(imageIcon);

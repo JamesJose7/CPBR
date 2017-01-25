@@ -27,6 +27,8 @@ public class Parser {
         if (instruction.toLowerCase().equals("clear")) {
             ConsoleManager.clear();
             Computer.processCounter--;
+        } else if (instruction.toLowerCase().equals("show")) {
+            log();
         } else {
             if (instruction.contains("-")) {
                 String[] split = instruction.split("-");
@@ -40,27 +42,38 @@ public class Parser {
                     if (mInstruction > 0 && mInstruction <= 21) {
                         //Check memory pos
                         if (mMemoryPos >= 900 && mMemoryPos <= 914) {
-                            //Log parsing complete for line
-                            ConsoleManager.printToConsole("Compiled with no errors");
-                            ConsoleManager.printProcessCycle(Computer.processCounter, 
-                                    Computer.mAcumulador, mInstruction, mMemoryPos);
 
                             switch (mInstruction) {
                                 case 1:
                                     instr1();
+                                    log();
                                     break;
                                 case 2:
                                     instr2();
-                                    break;
-                                case 3:
-                                    instr3();
-                                    break;
-                                case 4:
-                                    instr4();
+                                    log();
                                     break;
                                 case 5:
                                     instr5();
+                                    log();
                                     break;
+                                case 6:
+                                    instr6();
+                                    log();
+                                case 7:
+                                    instr7();
+                                    log();
+                                case 8:
+                                    instr8();
+                                    log();
+                                case 16:
+                                    instr16();
+                                    log();
+                                case 17:
+                                    instr17();
+                                    log();
+                                default:
+                                    ConsoleManager.printToConsole(getErrorMessage() + "Instruction does not exist");
+                                    throw new ParseException("Instruction does not exist", 0);
                             }
                         } else {
                             ConsoleManager.printToConsole(getErrorMessage() + "Memory position does not exist");
@@ -96,16 +109,41 @@ public class Parser {
         mMemoriaPerm.writeMemory(mMemoryPos, Computer.mAcumulador);
     }
 
-    private void instr3() {
-
-    }
-
-    private void instr4() {
-
-    }
-
     private void instr5() {
         //Clear AC add M(x) to AC
         Computer.mAcumulador += (Integer) mMemoriaPerm.readMemory().get(mMemoryPos);
+    }
+
+    private void instr6() {
+        //Clear AC and Substract AC - M(x)
+        Computer.mAcumulador -= (Integer) mMemoriaPerm.readMemory().get(mMemoryPos);
+    }
+
+    private void instr7() {
+        //Clear AC and add Absolute |M(x)| to AC
+        Computer.mAcumulador += Math.abs((Integer) mMemoriaPerm.readMemory().get(mMemoryPos));
+    }
+    
+    private void instr8() {
+        //Clear AC and substract Absolute |M(x)| to AC
+        Computer.mAcumulador -= Math.abs((Integer) mMemoriaPerm.readMemory().get(mMemoryPos));
+    }
+    
+    private void instr16() {
+        //Multiply AC by 2
+        Computer.mAcumulador *= 2;
+    }
+    
+    private void instr17() {
+        //Divide AC by 2
+        Computer.mAcumulador /= 2;
+    }
+
+    private void log() {
+        //Log parsing complete for line
+        ConsoleManager.printToConsole("-----------------------");
+        ConsoleManager.printToConsole("Compiled with no errors");
+        ConsoleManager.printProcessCycle(Computer.processCounter,
+                Computer.mAcumulador, mInstruction, mMemoryPos);
     }
 }

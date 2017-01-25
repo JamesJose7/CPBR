@@ -27,7 +27,7 @@ public class ConsoleManager {
         print(String.format("PC:\t%d\n"
                 + "AC:\t%d\n"
                 + "Instruction:\t%d\n"
-                + "MQ position:\t%d\n", processCount, ac, instruction, memPos));
+                + "M(x) position:\t%d\n", processCount, ac, instruction, memPos));
     }
     
     private static void print(String msg) {

@@ -167,13 +167,17 @@ public class GUI extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jSeparator17 = new javax.swing.JPopupMenu.Separator();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         instruccionesFrame.setTitle("Leyes de Von Neumann");
@@ -332,17 +336,6 @@ public class GUI extends javax.swing.JFrame {
 
         jMenu2.setText("Herramientas");
 
-        jMenuItem3.setText("Demo");
-        jMenu2.add(jMenuItem3);
-
-        jMenuItem4.setText("Instrucciones");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem4);
-
         jMenuItem5.setText("Llenar memoria");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -363,6 +356,16 @@ public class GUI extends javax.swing.JFrame {
 
         jMenu3.setText("Help");
 
+        jMenuItem7.setText("Demo");
+        jMenu3.add(jMenuItem7);
+
+        jMenu1.setText("Ejemplos");
+
+        jMenuItem8.setText("jMenuItem8");
+        jMenu1.add(jMenuItem8);
+
+        jMenu3.add(jMenu1);
+
         jMenuItem1.setText("Manual de usuario");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -371,6 +374,21 @@ public class GUI extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem1);
         jMenu3.add(jSeparator17);
+
+        jMenu4.setText("Instrucciones");
+
+        jMenuItem3.setText("Tabla Von Neumann");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem3);
+
+        jMenuItem9.setText("Instrucciones de programa");
+        jMenu4.add(jMenuItem9);
+
+        jMenu3.add(jMenu4);
 
         jMenuItem2.setText("Acerca de");
         jMenu3.add(jMenuItem2);
@@ -593,26 +611,6 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int w = (screenSize.width / 3);
-        int h = (int) ((int) screenSize.height - (screenSize.height * 0.1));
-        instruccionesFrame.setBounds(0, 0, w, h);
-        int nW = (int) ((int) w - (w * 0.045));
-        int nH = (int) ((int) h - (h * 0.045));
-        instruccionesLabel.setBounds(0, 0, nW, nH);
-        
-        ImageIcon imageIcon = 
-                new ImageIcon(new ImageIcon("src/res/Tabla Von Neumann.jpg").
-                        getImage().
-                        getScaledInstance(instruccionesLabel.getWidth(), instruccionesLabel.getHeight(), Image.SCALE_SMOOTH));
-        instruccionesLabel.setIcon(imageIcon);
-
-        //pack()
-        instruccionesFrame.setLocationRelativeTo(null);
-        instruccionesFrame.setVisible(true);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         computer.getMemory().fillMemory(915);
         loadMemory();
@@ -626,6 +624,10 @@ public class GUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         readEditor();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        showVonNeumanTable();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -693,6 +695,26 @@ public class GUI extends javax.swing.JFrame {
             System.out.println("That is not a number!");
         }
     }
+    
+    private void showVonNeumanTable() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int w = (screenSize.width / 3);
+        int h = (int) ((int) screenSize.height - (screenSize.height * 0.1));
+        instruccionesFrame.setBounds(0, 0, w, h);
+        int nW = (int) ((int) w - (w * 0.045));
+        int nH = (int) ((int) h - (h * 0.045));
+        instruccionesLabel.setBounds(0, 0, nW, nH);
+        
+        ImageIcon imageIcon = 
+                new ImageIcon(new ImageIcon("src/res/Tabla Von Neumann.jpg").
+                        getImage().
+                        getScaledInstance(instruccionesLabel.getWidth(), instruccionesLabel.getHeight(), Image.SCALE_SMOOTH));
+        instruccionesLabel.setIcon(imageIcon);
+
+        //pack()
+        instruccionesFrame.setLocationRelativeTo(null);
+        instruccionesFrame.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextArea consoleOutputTxtArea;
@@ -716,15 +738,19 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;

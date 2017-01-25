@@ -144,11 +144,13 @@ public class Parser {
     private void instr16() {
         //Multiply AC by 2
         Computer.mAcumulador *= 2;
+        mMemoriaPerm.writeMemory(mMemoryPos, Computer.mAcumulador);
     }
 
     private void instr17() {
         //Divide AC by 2
         Computer.mAcumulador /= 2;
+        mMemoriaPerm.writeMemory(mMemoryPos, Computer.mAcumulador);
     }
 
     private void log() {

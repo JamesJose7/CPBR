@@ -14,10 +14,17 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -36,12 +43,19 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import modelo.Computer;
 import modelo.Examples;
+import java.util.prefs.*;
 
 /**
  *
  * @author Jose
  */
 public class GUI extends javax.swing.JFrame {
+
+    // Preference key name
+    private Preferences prefs;
+
+    // Set the value of the preference
+    private boolean showSintax = true;
 
     private Computer computer;
     private ConsoleManager console;
@@ -51,7 +65,52 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
+        //Show sintaxis frame
+        try {
+            Runtime.getRuntime().exec("attrib -H prefs.txt");
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (!(new File("prefs.txt").exists())) {
+            try {
+                PrintWriter writer = new PrintWriter("prefs.txt", "UTF-8");
+                writer.println("true");
+                writer.close();
+            } catch (IOException e) {
+                // do something
+            }
+        } else {
+            try (BufferedReader br = new BufferedReader(new FileReader("prefs.txt"))) {
+                StringBuilder sb = new StringBuilder();
+                String line = br.readLine();
 
+                while (line != null) {
+                    sb.append(line);
+                    sb.append(System.lineSeparator());
+                    line = br.readLine();
+                }
+                String everything = sb.toString();
+                System.out.println(everything);
+                if (everything.contains("false")) {
+                    showSintax = false;
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            Runtime.getRuntime().exec("attrib +H prefs.txt");
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (showSintax) {
+            sintaxisFrame.setLocationRelativeTo(null);
+            sintaxisFrame.setAlwaysOnTop(true);
+            sintaxisFrame.setVisible(true);
+        }
         computer = new Computer();
 
         //Start console
@@ -130,6 +189,12 @@ public class GUI extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
+        sintaxisFrame = new javax.swing.JFrame();
+        jLabel27 = new javax.swing.JLabel();
+        dontShowAgainCheckBox = new javax.swing.JCheckBox();
+        closeSintaxFrame = new javax.swing.JButton();
+        sintaxisClosableFrame = new javax.swing.JFrame();
+        jLabel28 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         editorTxtArea = new javax.swing.JTextArea();
@@ -198,6 +263,7 @@ public class GUI extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         instruccionesFrame.setTitle("Leyes de Von Neumann");
@@ -327,6 +393,80 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jLabel25)
                     .addComponent(jButton3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        sintaxisFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        sintaxisFrame.setTitle("Sintaxis");
+        sintaxisFrame.setMaximumSize(new java.awt.Dimension(420, 490));
+        sintaxisFrame.setMinimumSize(new java.awt.Dimension(420, 490));
+        sintaxisFrame.setPreferredSize(new java.awt.Dimension(420, 490));
+        sintaxisFrame.setResizable(false);
+
+        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/sintaxis small.jpg"))); // NOI18N
+
+        dontShowAgainCheckBox.setText("No volver a mostrar este mensaje");
+        dontShowAgainCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dontShowAgainCheckBoxActionPerformed(evt);
+            }
+        });
+
+        closeSintaxFrame.setText("Cerrar");
+        closeSintaxFrame.setToolTipText("");
+        closeSintaxFrame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeSintaxFrameActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout sintaxisFrameLayout = new javax.swing.GroupLayout(sintaxisFrame.getContentPane());
+        sintaxisFrame.getContentPane().setLayout(sintaxisFrameLayout);
+        sintaxisFrameLayout.setHorizontalGroup(
+            sintaxisFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sintaxisFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(sintaxisFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sintaxisFrameLayout.createSequentialGroup()
+                        .addComponent(dontShowAgainCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(closeSintaxFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        sintaxisFrameLayout.setVerticalGroup(
+            sintaxisFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sintaxisFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sintaxisFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dontShowAgainCheckBox)
+                    .addComponent(closeSintaxFrame))
+                .addContainerGap(66, Short.MAX_VALUE))
+        );
+
+        sintaxisClosableFrame.setMaximumSize(new java.awt.Dimension(420, 420));
+        sintaxisClosableFrame.setMinimumSize(new java.awt.Dimension(420, 420));
+        sintaxisClosableFrame.setResizable(false);
+
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/sintaxis small.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout sintaxisClosableFrameLayout = new javax.swing.GroupLayout(sintaxisClosableFrame.getContentPane());
+        sintaxisClosableFrame.getContentPane().setLayout(sintaxisClosableFrameLayout);
+        sintaxisClosableFrameLayout.setHorizontalGroup(
+            sintaxisClosableFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sintaxisClosableFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        sintaxisClosableFrameLayout.setVerticalGroup(
+            sintaxisClosableFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sintaxisClosableFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -549,6 +689,14 @@ public class GUI extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem9);
+
+        jMenuItem12.setText("Sintaxis");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem12);
 
         jMenu3.add(jMenu4);
 
@@ -841,6 +989,46 @@ public class GUI extends javax.swing.JFrame {
         aboutFrame.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void dontShowAgainCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dontShowAgainCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dontShowAgainCheckBoxActionPerformed
+
+    private void closeSintaxFrameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeSintaxFrameActionPerformed
+
+        boolean showSintax = dontShowAgainCheckBox.isSelected();
+
+        try {
+            Runtime.getRuntime().exec("attrib -H prefs.txt");
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (showSintax) {
+            PrintWriter writer;
+            try {
+                writer = new PrintWriter("prefs.txt", "UTF-8");
+                writer.println("false");
+                writer.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            Runtime.getRuntime().exec("attrib +H prefs.txt");
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        sintaxisFrame.setVisible(false);
+
+    }//GEN-LAST:event_closeSintaxFrameActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        sintaxisClosableFrame.setLocationRelativeTo(null);
+        sintaxisClosableFrame.setVisible(true);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -956,7 +1144,9 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFrame aboutFrame;
+    private javax.swing.JButton closeSintaxFrame;
     public static javax.swing.JTextArea consoleOutputTxtArea;
+    private javax.swing.JCheckBox dontShowAgainCheckBox;
     private javax.swing.JTextArea editorTxtArea;
     private javax.swing.JFrame instruccionesFrame;
     private javax.swing.JLabel instruccionesLabel;
@@ -982,6 +1172,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -997,6 +1189,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -1039,5 +1232,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTextField m912;
     private javax.swing.JTextField m913;
     private javax.swing.JTextField m914;
+    private javax.swing.JFrame sintaxisClosableFrame;
+    private javax.swing.JFrame sintaxisFrame;
     // End of variables declaration//GEN-END:variables
 }

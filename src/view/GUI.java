@@ -8,6 +8,7 @@ package view;
 import controller.ConsoleManager;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -17,6 +18,9 @@ import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,7 +104,6 @@ public class GUI extends javax.swing.JFrame {
         //Load and display memory
         loadMemory();
 
-
     }
 
     /**
@@ -114,6 +117,19 @@ public class GUI extends javax.swing.JFrame {
 
         instruccionesFrame = new javax.swing.JFrame();
         instruccionesLabel = new javax.swing.JLabel();
+        aboutFrame = new javax.swing.JFrame();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel26 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         editorTxtArea = new javax.swing.JTextArea();
@@ -203,6 +219,116 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(instruccionesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
                 .addContainerGap())
+        );
+
+        aboutFrame.setMaximumSize(new java.awt.Dimension(700, 340));
+        aboutFrame.setMinimumSize(new java.awt.Dimension(700, 340));
+        aboutFrame.setPreferredSize(new java.awt.Dimension(700, 340));
+        aboutFrame.setResizable(false);
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel17.setText("About");
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel18.setText("Autores:");
+
+        jLabel19.setText("José Eduardo Eguiguren Palacios");
+
+        jLabel20.setText("Rommel André Herrera Salinas");
+
+        jLabel21.setText("Jorge Isaac Quinche Bravo");
+
+        jLabel22.setText("Stalin Fernando Carrión Carchi");
+
+        jLabel23.setText("Edgar Leonardo Vivanco López");
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel24.setText("GitHub Repository:");
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel25.setText("License");
+
+        jButton2.setText("GitHub");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("GPL-3.0");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/Iron Five small.jpg"))); // NOI18N
+        jLabel26.setMaximumSize(new java.awt.Dimension(331, 136));
+        jLabel26.setMinimumSize(new java.awt.Dimension(331, 136));
+        jLabel26.setPreferredSize(new java.awt.Dimension(331, 136));
+
+        javax.swing.GroupLayout aboutFrameLayout = new javax.swing.GroupLayout(aboutFrame.getContentPane());
+        aboutFrame.getContentPane().setLayout(aboutFrameLayout);
+        aboutFrameLayout.setHorizontalGroup(
+            aboutFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aboutFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(aboutFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(aboutFrameLayout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(aboutFrameLayout.createSequentialGroup()
+                        .addGroup(aboutFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, aboutFrameLayout.createSequentialGroup()
+                                .addComponent(jLabel24)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, aboutFrameLayout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addGap(18, 18, 18)
+                                .addGroup(aboutFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel20)
+                                    .addComponent(jLabel19)
+                                    .addComponent(jLabel21)
+                                    .addComponent(jLabel22)
+                                    .addComponent(jLabel23))))
+                        .addGap(18, 18, 18)
+                        .addGroup(aboutFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(aboutFrameLayout.createSequentialGroup()
+                                .addComponent(jLabel25)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton3))
+                            .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        aboutFrameLayout.setVerticalGroup(
+            aboutFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aboutFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17)
+                .addGap(18, 18, 18)
+                .addGroup(aboutFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(aboutFrameLayout.createSequentialGroup()
+                        .addGroup(aboutFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel19))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel23))
+                    .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addGroup(aboutFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(jButton2)
+                    .addComponent(jLabel25)
+                    .addComponent(jButton3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -429,6 +555,11 @@ public class GUI extends javax.swing.JFrame {
         jMenu3.add(jMenu4);
 
         jMenuItem2.setText("Acerca de");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem2);
 
         jMenuBar1.add(jMenu3);
@@ -687,6 +818,31 @@ public class GUI extends javax.swing.JFrame {
         editorTxtArea.setText(Examples.EXAMPLE_MULTIPLICACION);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            openWebpage("https://github.com/JamesJose7/CPBR");
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            openWebpage("https://github.com/JamesJose7/CPBR/blob/master/LICENSE");
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        aboutFrame.setLocationRelativeTo(null);
+        aboutFrame.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -753,7 +909,7 @@ public class GUI extends javax.swing.JFrame {
             System.out.println("That is not a number!");
         }
     }
-    
+
     private void showVonNeumanTable() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int w = (screenSize.width / 3);
@@ -762,9 +918,9 @@ public class GUI extends javax.swing.JFrame {
         int nW = (int) ((int) w - (w * 0.045));
         int nH = (int) ((int) h - (h * 0.045));
         instruccionesLabel.setBounds(0, 0, nW, nH);
-        
-        ImageIcon imageIcon = 
-                new ImageIcon(new ImageIcon("src/res/Tabla Von Neumann.jpg").
+
+        ImageIcon imageIcon
+                = new ImageIcon(new ImageIcon("src/res/Tabla Von Neumann.jpg").
                         getImage().
                         getScaledInstance(instruccionesLabel.getWidth(), instruccionesLabel.getHeight(), Image.SCALE_SMOOTH));
         instruccionesLabel.setIcon(imageIcon);
@@ -773,7 +929,7 @@ public class GUI extends javax.swing.JFrame {
         instruccionesFrame.setLocationRelativeTo(null);
         instruccionesFrame.setVisible(true);
     }
-    
+
     private void showInstructionsTable() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int w = (int) (screenSize.width / 2);
@@ -782,9 +938,9 @@ public class GUI extends javax.swing.JFrame {
         int nW = (int) ((int) w - (w * 0.045));
         int nH = (int) ((int) h - (h * 0.045));
         instruccionesLabel.setBounds(0, 0, nW, nH);
-        
-        ImageIcon imageIcon = 
-                new ImageIcon(new ImageIcon("src/res/tabla instrucciones.jpg").
+
+        ImageIcon imageIcon
+                = new ImageIcon(new ImageIcon("src/res/tabla instrucciones.jpg").
                         getImage().
                         getScaledInstance(instruccionesLabel.getWidth(), instruccionesLabel.getHeight(), Image.SCALE_SMOOTH));
         instruccionesLabel.setIcon(imageIcon);
@@ -794,12 +950,21 @@ public class GUI extends javax.swing.JFrame {
         instruccionesFrame.setVisible(true);
     }
 
+    public static void openWebpage(String url) throws URISyntaxException, IOException {
+        if (Desktop.isDesktopSupported()) {
+            Desktop.getDesktop().browse(new URI(url));
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame aboutFrame;
     public static javax.swing.JTextArea consoleOutputTxtArea;
     private javax.swing.JTextArea editorTxtArea;
     private javax.swing.JFrame instruccionesFrame;
     private javax.swing.JLabel instruccionesLabel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -808,7 +973,17 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

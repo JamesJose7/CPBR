@@ -221,9 +221,9 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        aboutFrame.setMaximumSize(new java.awt.Dimension(700, 340));
-        aboutFrame.setMinimumSize(new java.awt.Dimension(700, 340));
-        aboutFrame.setPreferredSize(new java.awt.Dimension(700, 340));
+        aboutFrame.setMaximumSize(new java.awt.Dimension(560, 340));
+        aboutFrame.setMinimumSize(new java.awt.Dimension(560, 340));
+        aboutFrame.setPreferredSize(new java.awt.Dimension(560, 340));
         aboutFrame.setResizable(false);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -246,7 +246,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel24.setText("GitHub Repository:");
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel25.setText("License");
+        jLabel25.setText("License:");
 
         jButton2.setText("GitHub");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -275,9 +275,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(aboutFrameLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(aboutFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(aboutFrameLayout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel17)
                     .addGroup(aboutFrameLayout.createSequentialGroup()
                         .addGroup(aboutFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, aboutFrameLayout.createSequentialGroup()
@@ -294,13 +292,13 @@ public class GUI extends javax.swing.JFrame {
                                     .addComponent(jLabel22)
                                     .addComponent(jLabel23))))
                         .addGap(18, 18, 18)
-                        .addGroup(aboutFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(aboutFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(aboutFrameLayout.createSequentialGroup()
                                 .addComponent(jLabel25)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton3))
-                            .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         aboutFrameLayout.setVerticalGroup(
             aboutFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -76,18 +76,7 @@ public class GUI extends javax.swing.JFrame {
                 // do something
             }
 
-            try {
-                Runtime.getRuntime().exec("attrib +H prefs.txt");
-            } catch (IOException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
         } else {
-            try {
-                Runtime.getRuntime().exec("attrib -H prefs.txt");
-            } catch (IOException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
             try (BufferedReader br = new BufferedReader(new FileReader("prefs.txt"))) {
                 StringBuilder sb = new StringBuilder();
                 String line = br.readLine();
@@ -104,12 +93,6 @@ public class GUI extends javax.swing.JFrame {
                 }
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            try {
-                Runtime.getRuntime().exec("attrib +H prefs.txt");
             } catch (IOException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1006,27 +989,15 @@ public class GUI extends javax.swing.JFrame {
 
         boolean showSintax = dontShowAgainCheckBox.isSelected();
 
-        if (new File("prefs.txt").exists()) {
+        if (showSintax) {
+            PrintWriter writer;
             try {
-                Runtime.getRuntime().exec("attrib -H prefs.txt");
-            } catch (IOException ex) {
+                writer = new PrintWriter("prefs.txt", "UTF-8");
+                writer.println("false");
+                writer.close();
+            } catch (FileNotFoundException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if (showSintax) {
-                PrintWriter writer;
-                try {
-                    writer = new PrintWriter("prefs.txt", "UTF-8");
-                    writer.println("false");
-                    writer.close();
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (UnsupportedEncodingException ex) {
-                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            try {
-                Runtime.getRuntime().exec("attrib +H prefs.txt");
-            } catch (IOException ex) {
+            } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

@@ -66,11 +66,7 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
         //Show sintaxis frame
-        try {
-            Runtime.getRuntime().exec("attrib -H prefs.txt");
-        } catch (IOException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
         if (!(new File("prefs.txt").exists())) {
             try {
                 PrintWriter writer = new PrintWriter("prefs.txt", "UTF-8");
@@ -79,7 +75,19 @@ public class GUI extends javax.swing.JFrame {
             } catch (IOException e) {
                 // do something
             }
+
+            try {
+                Runtime.getRuntime().exec("attrib +H prefs.txt");
+            } catch (IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         } else {
+            try {
+                Runtime.getRuntime().exec("attrib -H prefs.txt");
+            } catch (IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
             try (BufferedReader br = new BufferedReader(new FileReader("prefs.txt"))) {
                 StringBuilder sb = new StringBuilder();
                 String line = br.readLine();
@@ -99,13 +107,14 @@ public class GUI extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        try {
-            Runtime.getRuntime().exec("attrib +H prefs.txt");
-        } catch (IOException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
+            try {
+                Runtime.getRuntime().exec("attrib +H prefs.txt");
+            } catch (IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
         if (showSintax) {
             sintaxisFrame.setLocationRelativeTo(null);
             sintaxisFrame.setAlwaysOnTop(true);
@@ -997,27 +1006,29 @@ public class GUI extends javax.swing.JFrame {
 
         boolean showSintax = dontShowAgainCheckBox.isSelected();
 
-        try {
-            Runtime.getRuntime().exec("attrib -H prefs.txt");
-        } catch (IOException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (showSintax) {
-            PrintWriter writer;
+        if (new File("prefs.txt").exists()) {
             try {
-                writer = new PrintWriter("prefs.txt", "UTF-8");
-                writer.println("false");
-                writer.close();
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (UnsupportedEncodingException ex) {
+                Runtime.getRuntime().exec("attrib -H prefs.txt");
+            } catch (IOException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        try {
-            Runtime.getRuntime().exec("attrib +H prefs.txt");
-        } catch (IOException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            if (showSintax) {
+                PrintWriter writer;
+                try {
+                    writer = new PrintWriter("prefs.txt", "UTF-8");
+                    writer.println("false");
+                    writer.close();
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            try {
+                Runtime.getRuntime().exec("attrib +H prefs.txt");
+            } catch (IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         sintaxisFrame.setVisible(false);

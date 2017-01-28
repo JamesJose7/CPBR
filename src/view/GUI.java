@@ -1051,7 +1051,7 @@ public class GUI extends javax.swing.JFrame {
         instruccionesLabel.setBounds(0, 0, nW, nH);
 
         ImageIcon imageIcon
-                = new ImageIcon(new ImageIcon("src/res/Tabla Von Neumann.jpg").
+                = new ImageIcon(new ImageIcon(getClass().getResource("/res/Tabla Von Neumann.jpg")).
                         getImage().
                         getScaledInstance(instruccionesLabel.getWidth(), instruccionesLabel.getHeight(), Image.SCALE_SMOOTH));
         instruccionesLabel.setIcon(imageIcon);
@@ -1071,7 +1071,7 @@ public class GUI extends javax.swing.JFrame {
         instruccionesLabel.setBounds(0, 0, nW, nH);
 
         ImageIcon imageIcon
-                = new ImageIcon(new ImageIcon("src/res/tabla instrucciones.jpg").
+                = new ImageIcon(new ImageIcon(getClass().getResource("/res/tabla instrucciones.jpg")).
                         getImage().
                         getScaledInstance(instruccionesLabel.getWidth(), instruccionesLabel.getHeight(), Image.SCALE_SMOOTH));
         instruccionesLabel.setIcon(imageIcon);
@@ -1123,7 +1123,7 @@ public class GUI extends javax.swing.JFrame {
     }
     
     private void setFrameIcons() {
-        ImageIcon image = new ImageIcon("src/res/icono final.png");
+        ImageIcon image = new ImageIcon(getClass().getResource("/res/icono final.png"));
         Image icon = image.getImage();
         setIconImage(icon);
         instruccionesFrame.setIconImage(icon);

@@ -68,36 +68,11 @@ public class GUI extends javax.swing.JFrame {
         //Show sintaxis frame
 
         if (!(new File("prefs.txt").exists())) {
-            try {
-                PrintWriter writer = new PrintWriter("prefs.txt", "UTF-8");
-                writer.println("true");
-                writer.close();
-            } catch (IOException e) {
-                // do something
-            }
-
+            writePrefsFile("true");
         } else {
-            try (BufferedReader br = new BufferedReader(new FileReader("prefs.txt"))) {
-                StringBuilder sb = new StringBuilder();
-                String line = br.readLine();
-
-                while (line != null) {
-                    sb.append(line);
-                    sb.append(System.lineSeparator());
-                    line = br.readLine();
-                }
-                String everything = sb.toString();
-                System.out.println(everything);
-                if (everything.contains("false")) {
-                    showSintax = false;
-                }
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            readPrefsFile();
         }
+        
         if (showSintax) {
             sintaxisFrame.setLocationRelativeTo(null);
             sintaxisFrame.setAlwaysOnTop(true);
@@ -990,16 +965,7 @@ public class GUI extends javax.swing.JFrame {
         boolean showSintax = dontShowAgainCheckBox.isSelected();
 
         if (showSintax) {
-            PrintWriter writer;
-            try {
-                writer = new PrintWriter("prefs.txt", "UTF-8");
-                writer.println("false");
-                writer.close();
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            writePrefsFile("false");
         }
 
         sintaxisFrame.setVisible(false);
@@ -1122,6 +1088,41 @@ public class GUI extends javax.swing.JFrame {
         if (Desktop.isDesktopSupported()) {
             Desktop.getDesktop().browse(new URI(url));
         }
+    }
+    
+    private void writePrefsFile(String value) {
+        PrintWriter writer;
+            try {
+                writer = new PrintWriter("prefs.txt", "UTF-8");
+                writer.println(value);
+                writer.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
+    
+    private void readPrefsFile() {
+        try (BufferedReader br = new BufferedReader(new FileReader("prefs.txt"))) {
+                StringBuilder sb = new StringBuilder();
+                String line = br.readLine();
+
+                while (line != null) {
+                    sb.append(line);
+                    sb.append(System.lineSeparator());
+                    line = br.readLine();
+                }
+                String everything = sb.toString();
+                System.out.println(everything);
+                if (everything.contains("false")) {
+                    showSintax = false;
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

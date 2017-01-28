@@ -23,6 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -887,7 +888,8 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+        //Open pdf manual
+        openPdf("Manual Compilador.pdf");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -1130,6 +1132,29 @@ public class GUI extends javax.swing.JFrame {
         aboutFrame.setIconImage(icon);
         sintaxisFrame.setIconImage(icon);
         sintaxisClosableFrame.setIconImage(icon);
+    }
+    
+    public void openPdf(String pdf){
+        if (Desktop.isDesktopSupported())   
+        {   
+            InputStream jarPdf = getClass().getClassLoader().getResourceAsStream(pdf);
+
+            try {
+                File pdfTemp = new File("MANUAL_USUARIO_COMPILADOR.pdf");
+                // Extracting the PDF from the archive
+                FileOutputStream fos = new FileOutputStream(pdfTemp);
+                while (jarPdf.available() > 0) {
+                      fos.write(jarPdf.read());
+                }   // while (pdfInJar.available() > 0)
+                fos.close();
+                // Opening of the PDF
+                Desktop.getDesktop().open(pdfTemp);
+            }   // try
+
+            catch (IOException e) {
+                System.out.println("error : " + e);
+            }   // catch (IOException e)
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

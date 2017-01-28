@@ -65,6 +65,7 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
+        setFrameIcons();
         //Show sintaxis frame
 
         if (!(new File("prefs.txt").exists())) {
@@ -254,9 +255,7 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        aboutFrame.setMaximumSize(new java.awt.Dimension(560, 340));
         aboutFrame.setMinimumSize(new java.awt.Dimension(560, 340));
-        aboutFrame.setPreferredSize(new java.awt.Dimension(560, 340));
         aboutFrame.setResizable(false);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -364,9 +363,7 @@ public class GUI extends javax.swing.JFrame {
 
         sintaxisFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         sintaxisFrame.setTitle("Sintaxis");
-        sintaxisFrame.setMaximumSize(new java.awt.Dimension(420, 490));
         sintaxisFrame.setMinimumSize(new java.awt.Dimension(420, 490));
-        sintaxisFrame.setPreferredSize(new java.awt.Dimension(420, 490));
         sintaxisFrame.setResizable(false);
 
         jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/sintaxis small.jpg"))); // NOI18N
@@ -412,7 +409,6 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
-        sintaxisClosableFrame.setMaximumSize(new java.awt.Dimension(420, 420));
         sintaxisClosableFrame.setMinimumSize(new java.awt.Dimension(420, 420));
         sintaxisClosableFrame.setResizable(false);
 
@@ -437,6 +433,7 @@ public class GUI extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("CPBR");
         setResizable(false);
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -1123,6 +1120,16 @@ public class GUI extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
+    }
+    
+    private void setFrameIcons() {
+        ImageIcon image = new ImageIcon("src/res/icono final.png");
+        Image icon = image.getImage();
+        setIconImage(icon);
+        instruccionesFrame.setIconImage(icon);
+        aboutFrame.setIconImage(icon);
+        sintaxisFrame.setIconImage(icon);
+        sintaxisClosableFrame.setIconImage(icon);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

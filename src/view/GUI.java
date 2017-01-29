@@ -19,6 +19,7 @@ import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -45,7 +46,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import modelo.Computer;
 import modelo.Examples;
 import java.util.prefs.*;
-
 /**
  *
  * @author Jose
@@ -74,7 +74,7 @@ public class GUI extends javax.swing.JFrame {
         } else {
             readPrefsFile();
         }
-        
+
         if (showSintax) {
             sintaxisFrame.setLocationRelativeTo(null);
             sintaxisFrame.setAlwaysOnTop(true);
@@ -590,6 +590,11 @@ public class GUI extends javax.swing.JFrame {
         jMenu3.setText("Help");
 
         jMenuItem7.setText("Demo");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem7);
 
         jMenu1.setText("Ejemplos");
@@ -976,6 +981,10 @@ public class GUI extends javax.swing.JFrame {
         sintaxisClosableFrame.setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        openDemoVideo();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1088,42 +1097,42 @@ public class GUI extends javax.swing.JFrame {
             Desktop.getDesktop().browse(new URI(url));
         }
     }
-    
+
     private void writePrefsFile(String value) {
         PrintWriter writer;
-            try {
-                writer = new PrintWriter("prefs.txt", "UTF-8");
-                writer.println(value);
-                writer.close();
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            writer = new PrintWriter("prefs.txt", "UTF-8");
+            writer.println(value);
+            writer.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+
     private void readPrefsFile() {
         try (BufferedReader br = new BufferedReader(new FileReader("prefs.txt"))) {
-                StringBuilder sb = new StringBuilder();
-                String line = br.readLine();
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
 
-                while (line != null) {
-                    sb.append(line);
-                    sb.append(System.lineSeparator());
-                    line = br.readLine();
-                }
-                String everything = sb.toString();
-                System.out.println(everything);
-                if (everything.contains("false")) {
-                    showSintax = false;
-                }
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
             }
+            String everything = sb.toString();
+            System.out.println(everything);
+            if (everything.contains("false")) {
+                showSintax = false;
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+
     private void setFrameIcons() {
         ImageIcon image = new ImageIcon(getClass().getResource("/res/icono final.png"));
         Image icon = image.getImage();
@@ -1133,29 +1142,49 @@ public class GUI extends javax.swing.JFrame {
         sintaxisFrame.setIconImage(icon);
         sintaxisClosableFrame.setIconImage(icon);
     }
-    
-    public void openPdf(String pdf){
-        if (Desktop.isDesktopSupported())   
-        {   
-            InputStream jarPdf = getClass().getClassLoader().getResourceAsStream(pdf);
 
+    public void openPdf(String pdf) {
+        if (Desktop.isDesktopSupported()) {
+            InputStream jarPdf = getClass().getClassLoader().getResourceAsStream(pdf);
             try {
                 File pdfTemp = new File("MANUAL_USUARIO_COMPILADOR.pdf");
                 // Extracting the PDF from the archive
                 FileOutputStream fos = new FileOutputStream(pdfTemp);
                 while (jarPdf.available() > 0) {
-                      fos.write(jarPdf.read());
+                    fos.write(jarPdf.read());
                 }   // while (pdfInJar.available() > 0)
                 fos.close();
                 // Opening of the PDF
                 Desktop.getDesktop().open(pdfTemp);
-            }   // try
-
+            } // try
             catch (IOException e) {
                 System.out.println("error : " + e);
             }   // catch (IOException e)
         }
     }
+
+    private void openDemoVideo() {
+        try {
+            InputStream in = ClassLoader.getSystemClassLoader().getResourceAsStream("demo.mp4");            
+
+            File tempFile = File.createTempFile(String.valueOf(in.hashCode()), ".mp4");
+            tempFile.deleteOnExit();
+
+            try (FileOutputStream out = new FileOutputStream(tempFile)) {
+                //copy stream
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, bytesRead);
+                }
+            }
+            Desktop.getDesktop().open(tempFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFrame aboutFrame;
